@@ -4,21 +4,21 @@ import { Field, Form, Formik } from "formik"
 
 export default function HireSomeOne(){
 
-    const [profile,setProfile] = useState([])
-    const [exp,setExp] = useState([])
-    const [desc,setDesc] = useState([])
+    const [profile,setProfile] = useState()
+    const [exp,setExp] = useState()
+    const [desc,setDesc] = useState()
     const [techs,setTechs] = useState([])
 
     function onSubmit(values){
 
         const jobPost={
-        profile: values.profile,
-        exp: values.exp,
-        desc: values.desc,
-        techs: values.techs
+        profile:profile,
+        exp: exp,
+        desc: desc,
+        techs: techs
     }
 
-    console.log(jobPost)
+    console.log(jobPost.profile+" "+jobPost.desc+" "+jobPost.exp)
     console.log(jobPost.techs)
 
      hireSomeOne(jobPost)
@@ -51,19 +51,23 @@ export default function HireSomeOne(){
                     <Form>                    
                         <fieldset className="form-group">
                             <label>Profile</label>
-                            <Field name="profile" type="text" className="form-control"/>
+                            <Field name="profile" type="text" className="form-control" onChange={e => setProfile(e.target.value)} />
                         </fieldset>
                         <fieldset className="form-group">
                             <label>Experience in years</label>
-                            <Field name="exp" type="text" className="form-control"/>
+                            <Field name="exp" type="text" className="form-control" onChange={e => setExp(e.target.value)} />
                         </fieldset>
                         <fieldset className="form-group">
                             <label>Description</label>
-                            <Field name="desc" type="textarea" className="form-control"/>
+                            <Field name="desc" type="textarea" className="form-control" onChange={e => setDesc(e.target.value)} />
                         </fieldset>
                         <fieldset className="form-group">
                             <label>Skills required</label>
-                            <select multiple={true} name="techs">
+                            <select multiple={true} name="techs" onChange={e => {
+                                const options = [...e.target.selectedOptions];
+                                const techvalues = options.map(option => option.value);
+                                setTechs(techvalues);
+                              }}>
                                 <option value="Java">Java</option>
                                 <option value="Springboot">Springboot</option>
                                 <option value="React">React</option>

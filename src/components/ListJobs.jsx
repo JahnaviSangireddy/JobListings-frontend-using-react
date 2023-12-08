@@ -37,8 +37,7 @@ export default function ListJobs(){
                         </div>
                         <p className="mb-1"><h6>Job description :</h6>{job.desc}</p>
                         <p className="mb-1"><h6>Experience required :</h6>{job.exp}</p>
-                        <p className="mb-1"><h6>Skills required :</h6>{job.techs}</p>
-            
+                        <p className="mb-1"><h6>Skills required :</h6>{job.techs && job.techs.join(' , ')}</p>        
                         </a> 
                     </div>
                 )
